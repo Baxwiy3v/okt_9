@@ -359,25 +359,55 @@ namespace deneme
 
 
 
+4)
+C# proqramlaşdırma dilində mətnin əvvəlindən və/və ya sonundan boşluqları silmək üçün TrimStart(), Trim() və TrimEnd() metodlarından istifadə edilir. 
+Bu üsullar sətir mətni üzərində işləyir və aşağıdakı müxtəlif funksiyaları təmin edir:
+
+
+TrimStart(): Bu üsul mətnin əvvəlindən boşluqları və ya digər müəyyən edilmiş simvolları silir. İstifadə olunan təyin olunmuş simvollar sıfır və ya daha çox simvol ola bilər.
+ Bu üsul mətnin əvvəlindən silinmiş simvollar tapılana qədər işləyir.
+
+
+  static void Main(string[] args)
+  {
+
+      string text = "   Bu  metndir   ";
+      string trimmed = text.TrimStart(); // Mətnin başındakı boşluqları silir.
+      Console.WriteLine(trimmed); // "Bu  mətndir   "
+
+  }
+
+
+Trim(): Bu üsul mətnin əvvəlindən və sonundan boşluqları silir. Bağlanmış simvolları təyin edə bilməzsiniz və bu üsul yalnız boşluq simvollarını təmizləyir.
+
+
+  static void Main(string[] args)
+  {
+
+      string text = "   Bu  metndir   ";
+      string trimmed = text.Trim(); // Mətnin əvvəlindən və sonundan boşluqları silir.
+      Console.WriteLine(trimmed); // "Bu metndir"
+
+
+  }
+
+
+TrimEnd(): Bu üsul mətnin sonundan boşluqları və ya müəyyən edilmiş simvolları silir. 
+Təyin edilmiş simvollar  sonra yerinə yetirilir və mətnin sonuna çatana qədər silinir.
+
+
+static void Main(string[] args)
+{
+    string text = "   Bu bir metndir   ";
+    string trimmed = text.TrimEnd(); // Mətnin sonundakı boşluqları silir.
+    Console.WriteLine(trimmed); // "   Bu  metndir"
+
+
+}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//*************************************************************************************************************************************************
 
 
 5)
