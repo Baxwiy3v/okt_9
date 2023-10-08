@@ -1,0 +1,476 @@
+1)
+
+using System;
+using System.Collections.Generic;
+using System.Dynamic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace TASK_1
+{
+    class student
+    {
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Group { get; set; }
+        public int Point { get; set; }
+        public bool IsGraduated { get; set; }
+
+        public student(string name, string surname, string group, int point)
+        {
+            Name = name;
+            Surname = surname;
+            Group = group;
+            Point = point;
+            IsGraduated = Graduation();
+        }
+        public bool Graduation()
+        {
+            return Point >= 65;
+
+
+        }
+
+        public void GetInfo()
+        {
+            Console.WriteLine("adi:" + Name);
+            Console.WriteLine("Soyadi:" + Surname);
+            Console.WriteLine("Qrupu:" + Group);
+            Console.WriteLine("Bali:" + Point);
+        }
+
+
+        public void GraduationCheck()
+        {
+            if (IsGraduated)
+            {
+                Console.WriteLine(Name + " " + Surname + " mezun olubdur");
+            }
+            else
+            {
+                Console.WriteLine(Name + " " + Surname + " mezun olmayıb");
+            }
+
+        }
+
+        public void DiplomaDegree()
+        {
+            if (Point < 65)
+            {
+                Console.WriteLine(Name + " " + Surname + " üçün diplom yoxdur.");
+            }
+            else if (Point >= 65 && Point < 80)
+            {
+                Console.WriteLine(Name + " " + Surname + " üçün adi diplom verilir.");
+            }
+            else if (Point >= 80 && Point < 90)
+            {
+                Console.WriteLine(Name + " " + Surname + " üçün seref diplomu verilir.");
+            }
+            else
+            {
+                Console.WriteLine(Name + " " + Surname + " üçün yuksek seref diplomu verilir.");
+            }
+
+
+
+
+        }
+    }
+
+
+
+
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+
+            student telebe = new student("Aqil", "Baxsiyev", "AB104", 99);
+            {
+               
+                telebe.GetInfo();
+               
+                telebe.GraduationCheck();
+
+                telebe.DiplomaDegree();
+
+
+            }
+
+
+
+
+
+
+        }
+
+
+
+
+
+    }
+
+    
+    
+}
+
+//****************************************************************************************************************************************************
+
+
+
+2)
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web;
+
+namespace deneme
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+
+            
+                int[] ResadXallar = new int[3];
+                int[] AydanXallar = new int[3];
+
+                XallariDaxilEt("Resad", ResadXallar);
+                XallariDaxilEt("Aydan", AydanXallar);
+
+                Dereceleriartir(ResadXallar, AydanXallar);
+
+                Console.WriteLine("Resadın dereceleri:");
+                DerecelericapEt(ResadXallar);
+
+                Console.WriteLine("Aydanın dereceleri:");
+                DerecelericapEt(AydanXallar);
+            
+
+        }
+
+        static void XallariDaxilEt(string ad, int[] xallar)
+        {
+            Console.WriteLine(ad + "ın idman növlerine xalları daxil edin (1-100 arasında olmalıdır):");
+            for (int i = 0; i < 3; i++)
+            {
+                Console.Write("idman " + (i + 1) + ": ");
+                xallar[i] = int.Parse(Console.ReadLine());
+
+                if (xallar[i] < 1 || xallar[i] > 100)
+                {
+                    Console.WriteLine("Xal 1 ile 100 arasında olmalıdır.");
+                    i--;
+                }
+            }
+        }
+
+        static void Dereceleriartir(int[] ResadXallar, int[] AydanXallar)
+        {
+            int num = 0;
+            int num1 = 0;
+            for (int i = 0; i < 3; i++)
+            {
+                if (ResadXallar[i] > AydanXallar[i])
+                {
+                    num++;
+                    Console.WriteLine($"Rəşad {num} xal qazandi.");
+                }
+                else if (ResadXallar[i] < AydanXallar[i])
+                {
+                    num1++;
+                    Console.WriteLine($"Aydan {num1} xal qazandi.");
+                }
+            }
+        }
+
+        static void DerecelericapEt(int[] xallar)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                Console.WriteLine("Idman " + (i + 1) + " : " + xallar[i]);
+            }
+        }
+
+
+
+    }
+
+
+
+}
+
+
+2)ci class ile yazilis
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web;
+
+namespace deneme
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+
+            mesq resad = new mesq("Resad");
+            mesq aydan = new mesq("Aydan");
+
+            resad.XallariDaxilEt();
+            aydan.XallariDaxilEt();
+
+            mesq.DereceleriArtir(resad, aydan);
+
+            resad.DereceleriCapEt();
+            aydan.DereceleriCapEt();
+        } 
+
+
+
+
+    }
+
+    class mesq
+    {
+
+
+        public string ad;
+        public int[] xallar;
+
+        public mesq(string ad)
+        {
+            this.ad = ad;
+            this.xallar = new int[3];
+        }
+
+        public void XallariDaxilEt()
+        {
+            Console.WriteLine($"{ad}ın idman növlerine xalları daxil edin (1-100 arasında olmalıdır):");
+            for (int i = 0; i < 3; i++)
+            {
+                Console.Write($"idman {i + 1}: ");
+                int xal = int.Parse(Console.ReadLine());
+
+                if (xal < 1 || xal > 100)
+                {
+                    Console.WriteLine("Xal 1 ile 100 arasında olmalıdır.");
+                    i--;
+                }
+                else
+                {
+                    xallar[i] = xal;
+                }
+            }
+        }
+
+        public void DereceleriCapEt()
+        {
+            Console.WriteLine($"{ad}ın dereceleri:");
+            for (int i = 0; i < 3; i++)
+            {
+                Console.WriteLine($"idman {i + 1}: {xallar[i]}");
+            }
+        }
+
+        public static void DereceleriArtir(mesq resad, mesq aydan)
+        {
+            int resadxal = 0;
+            int aydanxal = 0;
+
+            for (int i = 0; i < 3; i++)
+            {
+                if (resad.xallar[i] > aydan.xallar[i])
+                {
+                    resadxal++;
+                    Console.WriteLine($"Resad {resadxal} xal qazandi.");
+                }
+                else if (resad.xallar[i] < aydan.xallar[i])
+                {
+                    aydanxal++;
+                    Console.WriteLine($"Aydan {aydanxal} xal qazandi.");
+                }
+            }
+        }
+
+    }
+
+}
+
+
+//*****************************************************************************************************************************************************
+
+
+3)
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web;
+
+namespace deneme
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+
+
+            string metin = "İki eyniölçülü matrisin cəmini ekrana çıxaran metod yazın";
+            string[] sozler = MetindekiSozler(metin);
+
+            Console.WriteLine("Metinin sozleri:");
+            for (int i = 0; i < sozler.Length; i++)
+            {
+
+                string soz = sozler[i];
+                Console.WriteLine(soz);
+            }
+
+        }
+
+        static string[] MetindekiSozler(string arr)
+        {
+            string[] sozler =arr.Split(' ');
+            return sozler;
+        }
+
+
+        
+    }
+
+
+
+}
+
+
+
+//*****************************************************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5)
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web;
+
+namespace deneme
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+
+                Console.WriteLine("Matrislerin setirleri: ");
+                int setirsayi = int.Parse(Console.ReadLine());
+
+                Console.WriteLine("Matrislerin sutunlari: ");
+                int sutunsayi = int.Parse(Console.ReadLine());
+
+
+                int[,] matris1 = new int[setirsayi, sutunsayi];
+                Console.WriteLine("1ci matrisi daxil edin:");
+                MatrisiDaxilEd(matris1);
+
+                int[,] matris2 = new int[setirsayi, sutunsayi];
+                Console.WriteLine("2ci matrisi daxil edin:");
+                MatrisiDaxilEd(matris2);
+
+
+                int[,] MatrisCemi = MatrisiCemle(matris1, matris2);
+
+                Console.WriteLine("Matrislerin cemi:");
+                MatrisiYazdir(MatrisCemi);
+
+                Console.ReadLine();
+            
+
+        }
+
+        static void MatrisiDaxilEd(int[,] matris)
+        {
+            int setirsayi = matris.GetLength(0);
+            int sutunsayi = matris.GetLength(1);
+
+            for (int i = 0; i < setirsayi; i++)
+            {
+                for (int j = 0; j < sutunsayi; j++)
+                {
+                    Console.Write($"({i}, {j}): ");
+                    matris[i, j] = int.Parse(Console.ReadLine());
+                }
+            }
+        }
+
+        static int[,] MatrisiCemle(int[,] matris1, int[,] matris2)
+        {
+            int setirsayi = matris1.GetLength(0);
+            int sutunsayi = matris1.GetLength(1);
+            int[,] MatrisCemi = new int[setirsayi, sutunsayi];
+
+            for (int i = 0; i < setirsayi; i++)
+            {
+                for (int j = 0; j < sutunsayi; j++)
+                {
+                    MatrisCemi[i, j] = matris1[i, j] + matris2[i, j];
+                }
+            }
+
+            return MatrisCemi;
+        }
+
+        static void MatrisiYazdir(int[,] matris)
+        {
+            int setirsayi = matris.GetLength(0);
+            int sutunsayi = matris.GetLength(1);
+
+            for (int i = 0; i < setirsayi; i++)
+            {
+                for (int j = 0; j < sutunsayi; j++)
+                {
+                    Console.Write(matris[i, j] + "\t");
+                }
+                Console.WriteLine();
+            }
+        }
+
+    }
+
+
+
+}
