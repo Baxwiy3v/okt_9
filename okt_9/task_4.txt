@@ -1,0 +1,70 @@
+using System;
+
+class CustomStringExtensions
+{
+    public static string CustomTrimStart(string input, char[] charsToTrim)
+    {
+        int startIndex = 0;
+        while (startIndex < input.Length && Array.Exists(charsToTrim, c => c == input[startIndex]))
+        {
+            startIndex++;
+        }
+
+        return input.Substring(startIndex);
+    }
+
+    public static string CustomTrim(string input, char[] charsToTrim)
+    {
+        int startIndex = 0;
+        int endIndex = input.Length - 1;
+
+        while (startIndex <= endIndex && Array.Exists(charsToTrim, c => c == input[startIndex]))
+        {
+            startIndex++;
+        }
+
+        while (endIndex >= startIndex && Array.Exists(charsToTrim, c => c == input[endIndex]))
+        {
+            endIndex--;
+        }
+
+        if (startIndex <= endIndex)
+        {
+            return input.Substring(startIndex, endIndex - startIndex + 1);
+        }
+        else
+        {
+            return string.Empty;
+        }
+    }
+
+    public static string CustomTrimEnd(string input, char[] charsToTrim)
+    {
+        int endIndex = input.Length - 1;
+        while (endIndex >= 0 && Array.Exists(charsToTrim, c => c == input[endIndex]))
+        {
+            endIndex--;
+        }
+
+        return input.Substring(0, endIndex + 1);
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        string input = "   Hello, World!   ";
+        char[] charsToTrim = { ' ', '!', ',' };
+
+        
+        string trimmedStart = CustomStringExtensions.CustomTrimStart(input, charsToTrim);
+        string trimmed = CustomStringExtensions.CustomTrim(input, charsToTrim);
+        string trimmedEnd = CustomStringExtensions.CustomTrimEnd(input, charsToTrim);
+
+        Console.WriteLine($"ARRAY: '{input}'");
+        Console.WriteLine($"CustomTrimStart : '{trimmedStart}'");
+        Console.WriteLine($"CustomTrim : '{trimmed}'");
+        Console.WriteLine($"CustomTrimEnd : '{trimmedEnd}'");
+    }
+}
